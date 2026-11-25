@@ -1,0 +1,39 @@
+.wrap {
+  overflow-x: auto;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--t-sm);
+}
+.table th,
+.table td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--rule);
+  text-align: right;
+  vertical-align: top;
+}
+.table th:first-child,
+.table td:first-child {
+  text-align: left;
+}
+.table thead th {
+  color: var(--ink-2);
+  font-weight: 500;
+  vertical-align: bottom;
+}
+.us {
+  font-weight: 600;
+  color: var(--ink);
+}
+.pass {
+  color: var(--met);
+  font-weight: 600;
+}
+.fail {
+  color: var(--missed);
+  font-weight: 600;
+}
+.zero {
+  color: var(--muted);
+}

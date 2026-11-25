@@ -1,0 +1,28 @@
+# Every design runs on the same prospects with the same luck. Ablations each change one part of the kit.
+designs:
+  as_is:
+    label: "As found: vendor default rules, no behavioural rules or re-screening, manual review first in first out, alerts polled hourly"
+    switches: { policy: vendor, triage: "off", queue: fifo, delivery: polling }
+  kit:
+    label: "The pilot kit: rules compiled from discovery and tuned on shared history, behavioural rules, re-screening, governed AI triage, priority queue, webhooks"
+    switches: { policy: tuned, behavioral: true, rescreen: true, segments: true, triage: governed, queue: priority, delivery: webhook }
+  untuned:
+    label: "Rules compiled from discovery, not tuned"
+    switches: { policy: compiled, behavioral: true, rescreen: true, segments: true, triage: governed, queue: priority, delivery: webhook }
+  no_behavioral:
+    label: "No behavioural rules"
+    switches: { policy: tuned, behavioral: false, rescreen: true, segments: true, triage: governed, queue: priority, delivery: webhook }
+  no_rescreen:
+    label: "No re-screening when a counterparty is attributed later"
+    switches: { policy: tuned, behavioral: true, rescreen: false, segments: true, triage: governed, queue: priority, delivery: webhook }
+  no_triage:
+    label: "Tuned rules, manual review without evidence packs or drafts"
+    switches: { policy: tuned, behavioral: true, rescreen: true, segments: true, triage: "off", queue: priority, delivery: webhook }
+  ungoverned_triage:
+    label: "AI triage closes low scores on its own, no hard rules, no sampling"
+    switches: { policy: tuned, behavioral: true, rescreen: true, segments: true, triage: ungoverned, queue: priority, delivery: webhook }
+  fifo_queue:
+    label: "First in, first out instead of priority"
+    switches: { policy: tuned, behavioral: true, rescreen: true, segments: true, triage: governed, queue: fifo, delivery: webhook }
+main: [as_is, kit]
+ablations: [untuned, no_behavioral, no_rescreen, no_triage, ungoverned_triage, fifo_queue]

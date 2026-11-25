@@ -1,0 +1,25 @@
+# Discovery notes, as the customer told them.
+name: Seeblick Privatbank (fictional)
+kind: private bank with a crypto custody and trading desk
+jurisdiction: Switzerland (FINMA)
+customers: 900
+segments: { retail: 0.20, hnw: 0.60, business: 0.20 }
+risk_appetite:
+  prohibited: [sanctions, ransomware, darknet_market, mixer]
+  high_risk: [scam, stolen_funds, no_kyc_exchange]
+  restricted: [gambling]
+  max_indirect_hops: 3
+travel_rule:
+  unhosted_threshold_eur: 1000
+review:
+  analysts: 2
+  minutes_per_day_each: 200
+  office_hours: [8, 17]
+  escalation_deadline_working_hours: 16   # internal: from alert to escalation, counted in office hours on weekdays
+case_management: { system: generic-rest, escalation: compliance officer }
+success_criteria:
+  reportable_customers_escalated_min: 0.90
+  sanctions_customers_escalated_min: 1.0
+  p90_working_hours_to_decision_max: 12
+  backlog_alerts_at_end_max: 15
+  reportable_missed_after_machine_close_max: 0   # reportable customers never escalated after a machine-closed alert

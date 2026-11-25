@@ -1,0 +1,5 @@
+# dev: every design, every change. heldout: a prospect never seen while building, run once behind reports/heldout.lock.
+dev: [11, 12, 13]
+heldout: [6101, 6102, 6103]
+webhook_scenarios_dev: 300
+webhook_scenarios_heldout: 600

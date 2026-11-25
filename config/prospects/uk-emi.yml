@@ -1,0 +1,25 @@
+# Discovery notes, as the customer told them.
+name: Thamesbridge Payments (fictional)
+kind: payments fintech (EMI) adding stablecoin payouts
+jurisdiction: United Kingdom (FCA)
+customers: 1800
+segments: { retail: 0.55, hnw: 0.05, business: 0.40 }
+risk_appetite:
+  prohibited: [sanctions, ransomware, darknet_market, stolen_funds]
+  high_risk: [mixer, scam]
+  restricted: [gambling, no_kyc_exchange]
+  max_indirect_hops: 2
+travel_rule:
+  unhosted_threshold_eur: 1150          # GBP 1,000 at the rate the customer uses
+review:
+  analysts: 2
+  minutes_per_day_each: 240
+  office_hours: [9, 17]
+  escalation_deadline_working_hours: 16   # internal: from alert to escalation, counted in office hours on weekdays
+case_management: { system: generic-rest, escalation: nominated officer }
+success_criteria:
+  reportable_customers_escalated_min: 0.85
+  sanctions_customers_escalated_min: 1.0
+  p90_working_hours_to_decision_max: 12
+  backlog_alerts_at_end_max: 20
+  reportable_missed_after_machine_close_max: 0   # reportable customers never escalated after a machine-closed alert

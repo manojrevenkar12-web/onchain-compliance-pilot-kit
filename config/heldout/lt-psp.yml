@@ -1,0 +1,25 @@
+# Held-out prospect: never seen while the kit was built. Run once (ADR 0006).
+name: Baltic Ledger Pay (fictional)
+kind: payment institution with crypto on- and off-ramps
+jurisdiction: Lithuania (Bank of Lithuania)
+customers: 2000
+segments: { retail: 0.70, hnw: 0.04, business: 0.26 }
+risk_appetite:
+  prohibited: [sanctions, ransomware, darknet_market]
+  high_risk: [mixer, scam, stolen_funds, no_kyc_exchange]
+  restricted: [gambling]
+  max_indirect_hops: 3
+travel_rule:
+  unhosted_threshold_eur: 1000
+review:
+  analysts: 2
+  minutes_per_day_each: 300
+  office_hours: [8, 17]
+  escalation_deadline_working_hours: 16   # internal: from alert to escalation, counted in office hours on weekdays
+case_management: { system: generic-rest, escalation: AML officer }
+success_criteria:
+  reportable_customers_escalated_min: 0.85
+  sanctions_customers_escalated_min: 1.0
+  p90_working_hours_to_decision_max: 16
+  backlog_alerts_at_end_max: 30
+  reportable_missed_after_machine_close_max: 0   # reportable customers never escalated after a machine-closed alert

@@ -1,0 +1,53 @@
+/* Pilot room: cool paper, two validated series (as found in amber, the kit in violet; validate_palette.js on
+   #FAFBFB and #151B21) and status colours kept apart, always with an icon and a word. */
+:root {
+  --font: "Public Sans Variable", system-ui, sans-serif;
+
+  --bg: #eef1f3;
+  --panel: #fafbfb;
+  --ink: #15212b;
+  --ink-2: #47555f;
+  --muted: #6a7781;
+  --rule: #d5dce1;
+  --focus: #6b5bd2;
+
+  --s-asis: #c2873a;
+  --s-kit: #6b5bd2;
+  --track: #e3e8ec;
+
+  --met: #2b7a4b;
+  --missed: #b3261e;
+
+  --r-sm: 4px;
+  --r-md: 8px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 20px;
+  --space-5: 32px;
+  --space-6: 56px;
+
+  --t-xs: 0.78rem;
+  --t-sm: 0.88rem;
+  --t-md: 1rem;
+  --t-lg: 1.35rem;
+  --t-xl: 1.9rem;
+  --t-hero: clamp(2.2rem, 5vw, 3.6rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1418;
+    --panel: #151b21;
+    --ink: #e5eaee;
+    --ink-2: #afbac3;
+    --muted: #84929d;
+    --rule: #28323b;
+    --focus: #8576e6;
+    --s-asis: #b98236;
+    --s-kit: #8576e6;
+    --track: #222b33;
+    --met: #63c28a;
+    --missed: #ef7d73;
+  }
+}

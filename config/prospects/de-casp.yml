@@ -1,0 +1,25 @@
+# Discovery notes, as the customer told them. The kit compiles this into rules and a pilot plan.
+name: Rheinwerk Digital (fictional)
+kind: crypto exchange, licensed CASP under MiCA
+jurisdiction: Germany (BaFin)
+customers: 2400
+segments: { retail: 0.86, hnw: 0.06, business: 0.08 }
+risk_appetite:
+  prohibited: [sanctions, ransomware, darknet_market]
+  high_risk: [mixer, scam, stolen_funds]
+  restricted: [gambling, no_kyc_exchange]
+  max_indirect_hops: 3
+travel_rule:
+  unhosted_threshold_eur: 1000          # EU Transfer of Funds Regulation: prove ownership of self-hosted wallets above this
+review:
+  analysts: 3
+  minutes_per_day_each: 300             # time on alerts after other duties
+  office_hours: [8, 18]
+  escalation_deadline_working_hours: 24   # internal: from alert to escalation, counted in office hours on weekdays
+case_management: { system: generic-rest, escalation: MLRO queue }
+success_criteria:
+  reportable_customers_escalated_min: 0.85
+  sanctions_customers_escalated_min: 1.0
+  p90_working_hours_to_decision_max: 16
+  backlog_alerts_at_end_max: 30
+  reportable_missed_after_machine_close_max: 0   # reportable customers never escalated after a machine-closed alert

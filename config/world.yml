@@ -1,0 +1,54 @@
+# The simulated onchain world and each prospect's customers: what every counterparty really is, when the
+# intelligence learns it, and which customers are really doing something reportable. Only world/ and the
+# evaluation (sim/, lab/) read this file. The kit sees screening results, the customer's own records and what the
+# customer told us in discovery.
+
+common: &common
+  calibration_days: 45                  # history the customer shares for the pilot
+  pilot_days: 45                        # the pilot itself; every number in the report is from this window
+  categories:                           # weight: share of counterparties; coverage: share the intelligence attributes
+    sanctions:       { weight: 0.010, coverage: 0.97, lag_days: [0, 2] }
+    ransomware:      { weight: 0.006, coverage: 0.85, lag_days: [0, 10] }
+    darknet_market:  { weight: 0.012, coverage: 0.85, lag_days: [0, 10] }
+    mixer:           { weight: 0.020, coverage: 0.95, lag_days: [0, 3] }
+    scam:            { weight: 0.040, coverage: 0.75, lag_days: [0, 35] }     # new scam sites are attributed late
+    stolen_funds:    { weight: 0.012, coverage: 0.80, lag_days: [0, 15] }
+    no_kyc_exchange: { weight: 0.030, coverage: 0.90, lag_days: [0, 5] }
+    gambling:        { weight: 0.050, coverage: 0.90, lag_days: [0, 5] }
+    exchange:        { weight: 0.300, coverage: 0.99, lag_days: [0, 0] }
+    defi:            { weight: 0.120, coverage: 0.90, lag_days: [0, 0] }
+    bridge:          { weight: 0.050, coverage: 0.95, lag_days: [0, 0] }
+    merchant:        { weight: 0.050, coverage: 0.80, lag_days: [0, 0] }
+  incidental_exposure:                  # ordinary unhosted wallets that once touched something risky, far upstream
+    share_of_unhosted: 0.35
+    categories: { mixer: 0.30, gambling: 0.25, scam: 0.15, no_kyc_exchange: 0.15, darknet_market: 0.08, sanctions: 0.04, stolen_funds: 0.03 }
+    share: [0.003, 0.06]
+    hops: [2, 4]
+  customer_types:                       # what each customer really does; reportable ones need escalation
+    normal:           { share: 0.875, reportable: false }
+    gambler:          { share: 0.040, reportable: false }
+    scam_victim:      { share: 0.022, reportable: true }   # paying a scam: escalate to stop it and report
+    mule:             { share: 0.020, reportable: true }   # receives scam proceeds, moves them on quickly
+    darknet_buyer:    { share: 0.012, reportable: true }
+    structurer:       { share: 0.020, reportable: true }   # many unhosted withdrawals just under the travel-rule threshold
+    sanctions_evader: { share: 0.006, reportable: true }
+  transfers_per_customer_per_window: 7
+  amount_eur_lognormal: { normal: [6.0, 1.3], business: [8.5, 1.2], hnw: [9.0, 1.1] }
+  analysts:                             # how a person decides an alert
+    accuracy_manual: 0.92
+    accuracy_with_right_draft: 0.96
+    accuracy_with_wrong_draft: 0.80     # people lean on a confident wrong draft
+    known_case_share: 0.80              # of truly reportable customers in the shared history, the share already on file
+
+dev:
+  <<: *common
+heldout:
+  <<: *common
+  customer_types:                       # more mules and scams, fewer ordinary customers
+    normal:           { share: 0.850, reportable: false }
+    gambler:          { share: 0.050, reportable: false }
+    scam_victim:      { share: 0.030, reportable: true }
+    mule:             { share: 0.030, reportable: true }
+    darknet_buyer:    { share: 0.010, reportable: true }
+    structurer:       { share: 0.022, reportable: true }
+    sanctions_evader: { share: 0.008, reportable: true }

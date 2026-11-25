@@ -1,0 +1,38 @@
+# The kit's settings. The world never reads this file (AGENTS.md).
+
+compile:                                  # starting thresholds before tuning; prohibited direct exposure is never tuned away
+  indirect_share_prohibited: 0.01
+  indirect_share_high_risk: 0.05
+  high_risk_direct_min_eur: { retail: 0, hnw: 0, business: 0 }
+  restricted_24h_sum_eur: 5000            # behavioural: total sent to a restricted category in 24 hours
+  structuring_count_7d: 4                 # behavioural: unhosted withdrawals at 60-100% of the travel-rule threshold in 7 days
+  pass_through_hours: 24                  # behavioural: risky deposit forwarded within this many hours
+  pass_through_share: 0.7
+  escalating_count_14d: 3                # behavioural: rising payments to a new payee within 14 days
+  escalating_min_total_eur: 1000
+  rescreen_days: 30                       # re-screen past transfers when the intelligence attributes a counterparty later
+
+tune:                                     # searched on the customer's shared history only
+  indirect_share_prohibited: [0.005, 0.01, 0.02, 0.05]
+  indirect_share_high_risk: [0.02, 0.05, 0.1, 0.2, 0.3]
+  high_risk_direct_min_eur: [0, 100, 250, 500]
+  structuring_count_7d: [3, 4, 5, 6]
+  restricted_24h_sum_eur: [2000, 5000, 10000]
+  capacity_use: 0.8                       # leave room: expected review time at most this share of analyst time
+
+review:                                   # minutes an analyst spends on one alert
+  minutes_manual: 25                      # gathering evidence across tools by hand
+  minutes_assisted: 12                    # with an evidence pack and a draft
+  minutes_fast_lane: 3                    # approving a low-risk draft close
+  polling_delay_hours: 1.0                # the as-is polls for alerts hourly
+  sample_fast_lane: 0.10                  # share of fast-lane closes a second analyst reviews in full
+
+triage:                                   # the model scores, code decides
+  fast_lane_below: 0.08                   # predicted chance of reportable
+  priority_above: 0.5
+  draft_escalate_above: 0.3               # the draft recommends escalation from this score
+  ungoverned_auto_close_below: 0.5        # used only by the ungoverned ablation
+  never_fast_lane:                        # hard rules, applied after the score
+    categories: [sanctions, ransomware, darknet_market]
+    families: [behavioral]
+    min_amount_eur: 10000

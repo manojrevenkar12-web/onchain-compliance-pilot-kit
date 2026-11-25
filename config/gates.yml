@@ -1,0 +1,11 @@
+# Release gates for the kit, set on the development prospects before the held-out run. Never loosened after it.
+kit:
+  success_criteria_met_min: 0.90            # share of (prospect, seed, criterion) the kit meets
+  reportable_escalated_over_as_is_pts_min: 40
+  sanctions_escalated_min: 1.0              # every sanctions-exposed customer escalated in time, every prospect
+  missed_after_machine_close_max: 0         # per prospect: reportable customers lost after a machine-closed alert
+  analyst_minutes_vs_manual_max: 0.60       # minutes a day with triage, ratio to the same rules reviewed by hand
+  backlog_vs_as_is_max: 0.20
+webhooks:
+  kit_scenarios_broken_max: 0
+  each_safeguard_matters: true

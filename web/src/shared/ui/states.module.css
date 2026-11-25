@@ -1,0 +1,46 @@
+.skeleton {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-5) 0;
+}
+.bar {
+  display: block;
+  height: 14px;
+  border-radius: var(--r-sm);
+  background: linear-gradient(90deg, var(--rule) 0%, var(--panel) 50%, var(--rule) 100%);
+  background-size: 200% 100%;
+  animation: sheen 1.4s linear infinite;
+}
+@keyframes sheen {
+  to {
+    background-position: -200% 0;
+  }
+}
+.error {
+  border-left: 3px solid var(--missed);
+  background: var(--panel);
+  padding: var(--space-4) var(--space-5);
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+}
+.button {
+  font-weight: 600;
+  color: var(--panel);
+  background: var(--ink);
+  border: 0;
+  border-radius: var(--r-sm);
+  padding: var(--space-2) var(--space-4);
+  cursor: pointer;
+}
+.empty {
+  border: 1px dashed var(--rule);
+  padding: var(--space-5);
+  color: var(--ink-2);
+  display: grid;
+  gap: var(--space-2);
+}
+.emptyTitle {
+  color: var(--ink);
+  font-weight: 600;
+}

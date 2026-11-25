@@ -1,0 +1,46 @@
+.wrap {
+  overflow-x: auto;
+}
+.table {
+  border-collapse: separate;
+  border-spacing: 2px;
+  width: 100%;
+  font-size: var(--t-sm);
+}
+.caption {
+  text-align: left;
+  color: var(--muted);
+  padding-bottom: var(--space-2);
+  caption-side: top;
+}
+.table th,
+.table td {
+  padding: var(--space-2) var(--space-3);
+  text-align: right;
+}
+.table th[scope="row"],
+.table thead th:first-child {
+  text-align: left;
+  font-weight: 500;
+}
+.kind {
+  font-weight: 500;
+  color: var(--ink-2);
+  vertical-align: bottom;
+  max-width: 12ch;
+}
+.total {
+  font-weight: 650;
+}
+.cell {
+  background: color-mix(in oklab, var(--missed) var(--w), var(--panel));
+  border-radius: 3px;
+}
+.none {
+  color: var(--muted);
+}
+.us th,
+.us td {
+  font-weight: 650;
+  color: var(--met);
+}
