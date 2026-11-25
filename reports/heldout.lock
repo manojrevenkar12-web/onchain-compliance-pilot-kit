@@ -1,0 +1,11 @@
+{
+ "seeds": [
+  6101,
+  6102,
+  6103
+ ],
+ "prospects": [
+  "lt-psp"
+ ],
+ "config_sha256": "08c8d2563a1b55d02dc30aacd7743c09b14708063d55c444ae8139d4b8a1dfff"
+}
